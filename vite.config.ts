@@ -10,7 +10,7 @@ export default defineConfig({
     "*": "vp check --fix",
   },
   fmt: {
-    ignorePatterns: ["apps/web/repos", "apps/web/**/*.tsbuildinfo"],
+    ignorePatterns: ["repos/**", "apps/web/repos", "apps/web/**/*.tsbuildinfo"],
     overrides: [
       {
         files: ["apps/web/**"],
@@ -31,6 +31,7 @@ export default defineConfig({
   },
   lint: {
     ignorePatterns: [
+      "repos/**",
       "apps/web/dist",
       "apps/web/repos",
       "apps/web/**/*.d.ts",
