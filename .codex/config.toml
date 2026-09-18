@@ -1,0 +1,4 @@
+[mcp_servers.foldkit-devtools]
+command = "pnpm"
+args = ["--dir", "apps/web", "exec", "foldkit-devtools-mcp"]
+cwd = ".."

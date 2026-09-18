@@ -8,6 +8,7 @@
     "prepare": "vp config"
   },
   "devDependencies": {
+    "@foldkit/oxlint-plugin": "0.13.0",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },

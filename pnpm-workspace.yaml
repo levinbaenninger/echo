@@ -7,9 +7,12 @@ catalogMode: prefer
 
 catalog:
   "@types/node": ^24
+  effect: 4.0.0-rc.115
   typescript: ^7.0.2
   vite: npm:@voidzero-dev/vite-plus-core@0.3.1
   vite-plus: 0.3.1
+allowBuilds:
+  msgpackr-extract: false
 overrides:
   vite@*: "catalog:"
 peerDependencyRules:
