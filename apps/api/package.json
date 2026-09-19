@@ -1,0 +1,25 @@
+{
+  "name": "@echo/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/api.ts"
+    },
+    "./rpcs": {
+      "types": "./src/rpcs.ts",
+      "import": "./src/rpcs.ts"
+    }
+  },
+  "dependencies": {
+    "@echo/db": "workspace:*",
+    "alchemy": "2.0.0-beta.79",
+    "drizzle-orm": "catalog:",
+    "effect": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  }
+}

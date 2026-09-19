@@ -1,0 +1,26 @@
+import * as Alchemy from "alchemy";
+import * as Cloudflare from "alchemy/Cloudflare";
+import * as Drizzle from "alchemy/Drizzle";
+import * as Neon from "alchemy/Neon";
+import { Effect, Layer } from "effect";
+
+import Api from "@echo/api";
+
+export default Alchemy.Stack(
+  "Echo",
+  {
+    providers: Layer.mergeAll(Cloudflare.providers(), Drizzle.providers(), Neon.providers()),
+    state: Cloudflare.state(),
+  },
+  Effect.gen(function* () {
+    const api = yield* Api;
+    const website = yield* Cloudflare.Website.Foldkit("Website", {
+      rootDir: "apps/web",
+    });
+
+    return {
+      websiteUrl: website.url,
+      apiUrl: api.url,
+    };
+  }),
+);
