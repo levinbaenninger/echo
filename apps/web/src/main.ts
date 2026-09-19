@@ -8,7 +8,7 @@ import { Button } from '@foldkit/ui'
 
 // MODEL
 
-export const Model = Schema.Struct({ count: Schema.Number })
+export const Model = Schema.Struct({ count: Schema.Finite })
 export type Model = typeof Model.Type
 
 // MESSAGE

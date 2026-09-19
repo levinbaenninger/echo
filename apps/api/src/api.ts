@@ -16,8 +16,7 @@ export default class Api extends Cloudflare.RpcWorker<Api>()(
     },
     schema: ApiRpcs,
   },
-  Effect.gen(function* () {
-    const db = yield* connectDatabase;
+  Effect.map(connectDatabase, (db) => {
     const handlers = TaskRpcsLive.pipe(Layer.provide(Layer.succeed(Database, db)));
 
     return RpcServer.toHttpEffect(ApiRpcs).pipe(

@@ -9,9 +9,13 @@ import Api from "@echo/api";
 export default Alchemy.Stack(
   "Echo",
   {
-    providers: Layer.mergeAll(Cloudflare.providers(), Drizzle.providers(), Neon.providers()),
+    providers: Layer.mergeAll(Cloudflare.providers(), Drizzle.providers()).pipe(
+      Layer.provideMerge(Neon.providers()),
+    ),
     state: Cloudflare.state(),
   },
+  // Alchemy's RpcWorkerYieldable declares its requirements as any.
+  // @effect-diagnostics-next-line anyUnknownInErrorContext:off
   Effect.gen(function* () {
     const api = yield* Api;
     const website = yield* Cloudflare.Website.Foldkit("Website", {

@@ -1,4 +1,5 @@
 import foldkitLint from "@foldkit/oxlint-plugin/recommended.json" with { type: "json" };
+import { recommended as effectLint } from "@effect/tsgo/oxlint-presets";
 import { defineConfig } from "vite-plus";
 import type { OxlintConfig } from "vite-plus/lint";
 
@@ -30,6 +31,7 @@ export default defineConfig({
     ],
   },
   lint: {
+    extends: [effectLint],
     ignorePatterns: [
       "repos/**",
       "apps/web/dist",

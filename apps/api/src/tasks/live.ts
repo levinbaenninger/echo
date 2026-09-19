@@ -1,16 +1,23 @@
-import { Effect, Layer } from "effect";
+import { BrowserCrypto } from "@effect/platform-browser";
+import { Crypto, Effect, Layer } from "effect";
 
 import { TaskHandlers } from "./handlers";
 import { TaskId } from "./model";
 import { TaskIds, TaskOperationsLive } from "./operations";
 import { TaskStoreLive } from "./task-store";
 
-const taskIds = Layer.succeed(
+const taskIds = Layer.effect(
   TaskIds,
-  TaskIds.of({
-    next: Effect.fn("TaskIds.next")(() => Effect.sync(() => TaskId.make(crypto.randomUUID()))),
+  Effect.gen(function* () {
+    const crypto = yield* Crypto.Crypto;
+    return TaskIds.of({
+      next: crypto.randomUUIDv4.pipe(
+        Effect.map((uuid) => TaskId.make(uuid)),
+        Effect.orDie,
+      ),
+    });
   }),
-);
+).pipe(Layer.provide(BrowserCrypto.layer));
 
 const taskOperations = TaskOperationsLive.pipe(
   Layer.provide(Layer.mergeAll(TaskStoreLive, taskIds)),

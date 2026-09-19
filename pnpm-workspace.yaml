@@ -7,7 +7,7 @@ catalogMode: prefer
 
 catalog:
   "@effect/platform-node": ^4.0.0-rc.115
-  "@effect/sql-pg": ^0.53.0
+  "@effect/sql-pg": 4.0.0-rc.115
   "@types/node": ^24
   "@types/pg": ^8.23.1
   drizzle-kit: 1.0.0-rc.5-ab785fc
@@ -22,6 +22,7 @@ allowBuilds:
   msgpackr-extract: false
   workerd: true
 overrides:
+  "@effect/sql-pg@*": "catalog:"
   vite@*: "catalog:"
 peerDependencyRules:
   allowAny:

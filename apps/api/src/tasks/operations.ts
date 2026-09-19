@@ -4,10 +4,9 @@ import { Task, TaskId, TaskNotFound } from "./model";
 import { TaskStore, type TaskStoreFailure } from "./task-store";
 
 /** A source of new task identifiers. */
-export class TaskIds extends Context.Service<
-  TaskIds,
-  { readonly next: () => Effect.Effect<TaskId> }
->()("@echo/api/TaskIds") {}
+export class TaskIds extends Context.Service<TaskIds, { readonly next: Effect.Effect<TaskId> }>()(
+  "@echo/api/TaskIds",
+) {}
 
 /** Input for creating a task. */
 export interface CreateTaskInput {
@@ -41,7 +40,7 @@ export const TaskOperationsLive = Layer.effect(
         return task.value;
       }),
       createTask: Effect.fn("Tasks.createTask")(function* (input: CreateTaskInput) {
-        const id = yield* ids.next();
+        const id = yield* ids.next;
         const task = Task.make({ id, title: input.title, completed: false });
         yield* store.insert(task);
         return task;

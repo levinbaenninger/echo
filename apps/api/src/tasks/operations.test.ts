@@ -7,7 +7,7 @@ import { TaskStore } from "./task-store";
 
 const knownId = TaskId.make("a3bcb5e4-4705-45ba-87e1-b398a21b7953");
 
-test("a created task can be retrieved", async () => {
+test("a created task can be retrieved", () => {
   const store = Layer.effect(
     TaskStore,
     Effect.gen(function* () {
@@ -20,10 +20,10 @@ test("a created task can be retrieved", async () => {
       });
     }),
   );
-  const ids = Layer.succeed(TaskIds, TaskIds.of({ next: () => Effect.succeed(knownId) }));
+  const ids = Layer.succeed(TaskIds, TaskIds.of({ next: Effect.succeed(knownId) }));
   const operations = TaskOperationsLive.pipe(Layer.provide(Layer.mergeAll(store, ids)));
 
-  await Effect.runPromise(
+  return Effect.runPromise(
     Effect.gen(function* () {
       const tasks = yield* TaskOperations;
       const created = yield* tasks.createTask({ title: "Write tests" });

@@ -1,4 +1,4 @@
-import { Effect, Layer, Option, Ref } from "effect";
+import { Effect, Layer, Option, Ref, Schema } from "effect";
 import { RpcTest } from "effect/unstable/rpc";
 import { expect, test } from "vite-plus/test";
 
@@ -16,7 +16,7 @@ const failure = new TaskStoreFailure({
   cause: new Error("private database detail"),
 });
 
-test("tasks can be created and read through the public RPC", async () => {
+test("tasks can be created and read through the public RPC", () => {
   const store = Layer.effect(
     TaskStore,
     Effect.gen(function* () {
@@ -29,11 +29,11 @@ test("tasks can be created and read through the public RPC", async () => {
       });
     }),
   );
-  const ids = Layer.succeed(TaskIds, TaskIds.of({ next: () => Effect.succeed(knownId) }));
+  const ids = Layer.succeed(TaskIds, TaskIds.of({ next: Effect.succeed(knownId) }));
   const operations = TaskOperationsLive.pipe(Layer.provide(Layer.mergeAll(store, ids)));
   const handlers = TaskHandlers.pipe(Layer.provide(operations));
 
-  await Effect.runPromise(
+  return Effect.runPromise(
     Effect.gen(function* () {
       const client = yield* RpcTest.makeClient(TaskRpcs);
       const created = yield* client.createTask({ title: "Write tests" });
@@ -45,7 +45,7 @@ test("tasks can be created and read through the public RPC", async () => {
   );
 });
 
-test("a task read failure has a safe RPC error", async () => {
+test("a task read failure has a safe RPC error", () => {
   const store = Layer.succeed(
     TaskStore,
     TaskStore.of({
@@ -53,35 +53,36 @@ test("a task read failure has a safe RPC error", async () => {
       insert: () => Effect.void,
     }),
   );
-  const ids = Layer.succeed(TaskIds, TaskIds.of({ next: () => Effect.succeed(knownId) }));
+  const ids = Layer.succeed(TaskIds, TaskIds.of({ next: Effect.succeed(knownId) }));
   const operations = TaskOperationsLive.pipe(Layer.provide(Layer.mergeAll(store, ids)));
   const handlers = TaskHandlers.pipe(Layer.provide(operations));
 
-  await Effect.runPromise(
+  return Effect.runPromise(
     Effect.gen(function* () {
       const client = yield* RpcTest.makeClient(TaskRpcs);
       const error = yield* client.getTask({ id: knownId }).pipe(Effect.flip);
 
       expect(error._tag).toBe("GetTaskFailed");
       expect(error.message).toBe("Unable to load task");
-      expect(JSON.stringify(error)).not.toContain("private database detail");
+      const serialized = yield* Schema.encodeEffect(Schema.fromJsonString(Schema.Unknown))(error);
+      expect(serialized).not.toContain("private database detail");
     }).pipe(Effect.provide(handlers), Effect.scoped),
   );
 });
 
-test("a missing task remains a typed RPC error", async () => {
+test("a missing task remains a typed RPC error", () => {
   const store = Layer.succeed(
     TaskStore,
     TaskStore.of({
-      findById: () => Effect.succeed(Option.none()),
+      findById: () => Effect.succeedNone,
       insert: () => Effect.void,
     }),
   );
-  const ids = Layer.succeed(TaskIds, TaskIds.of({ next: () => Effect.succeed(knownId) }));
+  const ids = Layer.succeed(TaskIds, TaskIds.of({ next: Effect.succeed(knownId) }));
   const operations = TaskOperationsLive.pipe(Layer.provide(Layer.mergeAll(store, ids)));
   const handlers = TaskHandlers.pipe(Layer.provide(operations));
 
-  await Effect.runPromise(
+  return Effect.runPromise(
     Effect.gen(function* () {
       const client = yield* RpcTest.makeClient(TaskRpcs);
       const error = yield* client.getTask({ id: knownId }).pipe(Effect.flip);
@@ -91,11 +92,11 @@ test("a missing task remains a typed RPC error", async () => {
   );
 });
 
-test("a task write failure does not expose database details", async () => {
+test("a task write failure does not expose database details", () => {
   const store = Layer.succeed(
     TaskStore,
     TaskStore.of({
-      findById: () => Effect.succeed(Option.none()),
+      findById: () => Effect.succeedNone,
       insert: () =>
         Effect.fail(
           new TaskStoreFailure({
@@ -106,18 +107,19 @@ test("a task write failure does not expose database details", async () => {
         ),
     }),
   );
-  const ids = Layer.succeed(TaskIds, TaskIds.of({ next: () => Effect.succeed(knownId) }));
+  const ids = Layer.succeed(TaskIds, TaskIds.of({ next: Effect.succeed(knownId) }));
   const operations = TaskOperationsLive.pipe(Layer.provide(Layer.mergeAll(store, ids)));
   const handlers = TaskHandlers.pipe(Layer.provide(operations));
 
-  await Effect.runPromise(
+  return Effect.runPromise(
     Effect.gen(function* () {
       const client = yield* RpcTest.makeClient(TaskRpcs);
       const error = yield* client.createTask({ title: "Write tests" }).pipe(Effect.flip);
 
       expect(error._tag).toBe("CreateTaskFailed");
       expect(error.message).toBe("Unable to create task");
-      expect(JSON.stringify(error)).not.toContain("private database detail");
+      const serialized = yield* Schema.encodeEffect(Schema.fromJsonString(Schema.Unknown))(error);
+      expect(serialized).not.toContain("private database detail");
     }).pipe(Effect.provide(handlers), Effect.scoped),
   );
 });

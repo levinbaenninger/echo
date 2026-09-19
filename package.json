@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "ready": "vp check && vp run -r test && vp run -r build",
-    "prepare": "vp config"
+    "prepare": "vp config && effect-tsgo patch --typescript --oxlint"
   },
   "dependencies": {
     "@echo/api": "workspace:*",
@@ -14,7 +14,9 @@
     "effect": "catalog:"
   },
   "devDependencies": {
+    "@effect/tsgo": "0.45.0",
     "@foldkit/oxlint-plugin": "0.13.0",
+    "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },

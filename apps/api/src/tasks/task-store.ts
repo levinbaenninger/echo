@@ -50,7 +50,7 @@ export const TaskStoreLive = Layer.effect(
         const row = rows[0];
         if (row === undefined) return Option.none();
 
-        const task = yield* Schema.decodeUnknownEffect(Task)(row).pipe(
+        const task = yield* Schema.decodeEffect(Task)(row).pipe(
           Effect.mapError(
             (cause) =>
               new TaskStoreFailure({
