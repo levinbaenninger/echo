@@ -8,8 +8,8 @@
       "import": "./src/api.ts"
     },
     "./rpcs": {
-      "types": "./src/rpcs.ts",
-      "import": "./src/rpcs.ts"
+      "types": "./src/rpc.ts",
+      "import": "./src/rpc.ts"
     }
   },
   "dependencies": {
@@ -20,6 +20,7 @@
     "effect": "catalog:"
   },
   "devDependencies": {
+    "@effect/vitest": "catalog:",
     "typescript": "catalog:",
     "vite-plus": "catalog:"
   }

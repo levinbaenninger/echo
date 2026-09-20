@@ -3,8 +3,8 @@ import { Effect, Layer } from "effect";
 import { RpcSerialization, RpcServer } from "effect/unstable/rpc";
 
 import { connectDatabase, Database } from "./database";
-import { ApiRpcs } from "./rpcs";
-import { TaskRpcsLive } from "./tasks/live";
+import { ApiRpcs } from "./rpc";
+import { TaskRpcsLive } from "./tasks/rpc/layer";
 
 /** Cloudflare RPC Worker hosting the API's resource groups. */
 export default class Api extends Cloudflare.RpcWorker<Api>()(

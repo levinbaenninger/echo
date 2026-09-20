@@ -8,6 +8,7 @@ catalogMode: prefer
 catalog:
   "@effect/platform-node": ^4.0.0-rc.115
   "@effect/sql-pg": 4.0.0-rc.115
+  "@effect/vitest": 4.0.0-rc.115
   "@types/node": ^24
   "@types/pg": ^8.23.1
   drizzle-kit: 1.0.0-rc.5-ab785fc
@@ -22,8 +23,19 @@ allowBuilds:
   msgpackr-extract: false
   workerd: true
 overrides:
+  # Effect's test helpers must use Vite+'s Vitest instance.
+  "@effect/vitest>vitest": "-"
   "@effect/sql-pg@*": "catalog:"
   vite@*: "catalog:"
+packageExtensions:
+  "@effect/vitest@*":
+    dependencies:
+      vite-plus: "catalog:"
+    peerDependenciesMeta:
+      vitest:
+        optional: true
+patchedDependencies:
+  "@effect/vitest@4.0.0-rc.115": patches/@effect__vitest@4.0.0-rc.115.patch
 peerDependencyRules:
   allowAny:
     - vite

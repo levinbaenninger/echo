@@ -1,12 +1,8 @@
 import { Context, Effect, Layer, Option } from "effect";
 
-import { Task, TaskId, TaskNotFound } from "./model";
-import { TaskStore, type TaskStoreFailure } from "./task-store";
-
-/** A source of new task identifiers. */
-export class TaskIds extends Context.Service<TaskIds, { readonly next: Effect.Effect<TaskId> }>()(
-  "@echo/api/TaskIds",
-) {}
+import { Task, TaskId, TaskNotFound } from "./task";
+import { TaskStore, type TaskStoreFailure } from "./persistence/store";
+import { TaskIds, type TaskIdGenerationFailed } from "./ids";
 
 /** Input for creating a task. */
 export interface CreateTaskInput {
@@ -15,8 +11,12 @@ export interface CreateTaskInput {
 
 /** Operations available to the task RPC adapter. */
 export interface TaskOperationsService {
+  /** Loads a task, including a typed not-found result when absent. */
   readonly getTask: (id: TaskId) => Effect.Effect<Task, TaskNotFound | TaskStoreFailure>;
-  readonly createTask: (input: CreateTaskInput) => Effect.Effect<Task, TaskStoreFailure>;
+  /** Generates an ID and stores a new incomplete task. */
+  readonly createTask: (
+    input: CreateTaskInput,
+  ) => Effect.Effect<Task, TaskIdGenerationFailed | TaskStoreFailure>;
 }
 
 /** Application operations for tasks. */
@@ -40,7 +40,7 @@ export const TaskOperationsLive = Layer.effect(
         return task.value;
       }),
       createTask: Effect.fn("Tasks.createTask")(function* (input: CreateTaskInput) {
-        const id = yield* ids.next;
+        const id = yield* ids.next();
         const task = Task.make({ id, title: input.title, completed: false });
         yield* store.insert(task);
         return task;

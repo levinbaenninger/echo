@@ -21,13 +21,3 @@ export class TaskNotFound extends Schema.TaggedError<TaskNotFound>()("TaskNotFou
   id: TaskId,
   message: Schema.String,
 }) {}
-
-/** The task could not be read. */
-export class GetTaskFailed extends Schema.TaggedError<GetTaskFailed>()("GetTaskFailed", {
-  message: Schema.String,
-}) {}
-
-/** The task could not be created. */
-export class CreateTaskFailed extends Schema.TaggedError<CreateTaskFailed>()("CreateTaskFailed", {
-  message: Schema.String,
-}) {}

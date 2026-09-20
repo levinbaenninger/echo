@@ -1,31 +1,13 @@
-import { eq } from "drizzle-orm";
-import { Context, Effect, Layer, Option, Schema } from "effect";
-
 import { Tasks } from "@echo/db";
+import { eq } from "drizzle-orm";
+import { Effect, Layer, Option, Schema } from "effect";
 
-import { Database } from "../database";
-import { Task, type TaskId } from "./model";
+import { Database } from "../../database";
+import { Task, type TaskId } from "../task";
+import { TaskStore, TaskStoreFailure } from "./store";
 
-/** An expected failure while accessing task persistence. */
-export class TaskStoreFailure extends Schema.TaggedError<TaskStoreFailure>()("TaskStoreFailure", {
-  operation: Schema.Literals(["findById", "insert"]),
-  message: Schema.String,
-  cause: Schema.Defect(),
-}) {}
-
-/** Persistence operations needed by the task application module. */
-export interface TaskStoreService {
-  readonly findById: (id: TaskId) => Effect.Effect<Option.Option<Task>, TaskStoreFailure>;
-  readonly insert: (task: Task) => Effect.Effect<void, TaskStoreFailure>;
-}
-
-/** The task persistence port. */
-export class TaskStore extends Context.Service<TaskStore, TaskStoreService>()(
-  "@echo/api/TaskStore",
-) {}
-
-/** A Postgres implementation of the task persistence port. */
-export const TaskStoreLive = Layer.effect(
+/** Postgres-backed task persistence with row validation on reads. */
+export const PostgresTaskStore = Layer.effect(
   TaskStore,
   Effect.gen(function* () {
     const db = yield* Database;
