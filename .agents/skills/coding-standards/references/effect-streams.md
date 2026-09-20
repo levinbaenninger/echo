@@ -16,18 +16,17 @@ Use streams for sources that are naturally many-valued and time-ordered:
 - scheduled ticks when values matter
 - pipelines with filtering, mapping, buffering, throttling, or bounded concurrent processing
 
-Do not use streams just to loop forever. For one repeated effect with no emitted values, use `Effect.repeat(...)` with `Schedule`; read `SCHEDULING.md`.
+Use `Effect.repeat(...)` with `Schedule` for one repeated effect with no emitted values; read [`effect-scheduling-and-retry.md`](effect-scheduling-and-retry.md). Reserve streams for work that emits values.
 
 ## Source Chooser
 
 - In-memory values: `Stream.make(...)` or `Stream.fromIterable(...)`.
-- Test fixtures: `Stream.fromIterable(...)`, often with `Stream.concat(Stream.never)` for an open subscription.
 - Queue-backed callback boundary: `Queue` plus `Stream.fromQueue(...)`.
 - Broadcast events: `PubSub` plus `Stream.fromPubSub(...)`.
 - Latest-value state plus updates: `SubscriptionRef`.
 - Schedule-generated ticks/values: `Stream.fromSchedule(...)`.
-- Paginated pull APIs: `Stream.paginate(...)`; its effectful step returns `Effect<readonly [ReadonlyArray<A>, Option<S>], E, R>`. The stream emits `A` elements, not page arrays. `Option.none()` ends pagination after emitting that step's elements; empty arrays are allowed.
-- Async iterable/platform source: `Stream.fromAsyncIterable(...)` when no native Effect source exists.
+- Paginated pull APIs: `Stream.paginate(...)`; its effectful step returns `Effect<[chunk, Option<nextState>]>`.
+- Async iterable/platform source: prefer a native Effect source; otherwise use `Stream.fromAsyncIterable(...)`.
 - Effect that produces a stream after reading services/config: `Stream.unwrap(...)`.
 
 ## Transformation Chooser
@@ -45,12 +44,11 @@ Do not use streams just to loop forever. For one repeated effect with no emitted
 
 - Side-effecting consumer: `Stream.runForEach(...)`.
 - Ignore elements but run the stream: `Stream.runDrain`.
-- Tests/small finite streams: `Stream.runCollect`.
-- First N values in tests: `Stream.take(n)` plus `Stream.runCollect`.
+- Materialize a finite stream: `Stream.runCollect`.
 - Fold into a value: `Stream.runFold(...)`.
-- Long-lived consumer in a layer: `stream.pipe(Stream.runForEach(...), Effect.forkScoped)`.
+- Long-lived consumer: use the scoped layer pattern below.
 
-Avoid `Stream.runCollect` on unbounded or production event streams.
+Use `Stream.runCollect` only when the stream is known to terminate.
 
 ## Long-Lived Consumers
 
@@ -70,20 +68,15 @@ export const layer = Layer.effectDiscard(
 );
 ```
 
-Guidance:
-
-- Let the layer own the stream lifetime.
-- Use `Effect.forkScoped` for the ordinary case.
-- If methods need to fork work into the layer lifetime, capture `Scope.Scope` during layer acquisition and use `Effect.forkIn(scope)` internally. Do not expose the scope as public service API.
-- Preserve stream failures unless the owning boundary has a truthful recovery policy.
+If service methods must fork work into the layer lifetime, capture `Scope.Scope` during layer acquisition, use `Effect.forkIn(scope)` internally, and keep the scope private. Let stream failures reach the owning boundary unless it has a truthful recovery policy.
 
 ## Queues, PubSub, And SubscriptionRef
 
 - Use `Queue` when each event/item should be consumed by one consumer or worker.
 - Use `PubSub` when every subscriber should see every event.
 - Use `SubscriptionRef` when consumers need the current value and a stream of changes.
-- Expose a `Stream` from service interfaces when callers should consume events, not push into the queue.
-- Keep producer queues/private refs inside the implementation or test service.
+- Expose a `Stream` from service interfaces for caller-consumed events.
+- Keep producer queues and mutable refs inside the implementation or test service.
 
 Good service shape:
 
@@ -111,24 +104,23 @@ Use `Stream.debounce(...)` for quiet-period behavior and `Stream.throttle(...)` 
 
 ## Error Handling
 
-- Prefer typed stream errors over defects.
-- Use `Stream.mapError(...)` to translate errors at boundaries.
-- Use `Stream.catchIf(...)`, `Stream.catchTag(...)`, or `Stream.catchFilter(...)` for typed recovery.
-- Use `Stream.catchCause(...)` only at explicit supervision boundaries.
-- Do not hide stream defects by default; let them reach the owning layer/runtime unless the stream is explicitly best-effort.
+- Translate typed errors at boundaries with `Stream.mapError(...)`.
+- Recover typed errors with `Stream.catchIf(...)`, `Stream.catchTag(...)`, or `Stream.catchFilter(...)`.
+- Reserve `Stream.catchCause(...)` for explicit supervision boundaries.
 
 ## Keyed Concurrency
 
-For streams of work keyed by session/channel/id, prefer a named helper over ad hoc maps of fibers.
-
-If the codebase already has a keyed-run helper (for example a `runForEachKeyed` that runs different keys concurrently while serializing each key and coalescing pending values into one latest-value rerun), use it. Otherwise build one named helper with `FiberMap` rather than scattering fiber bookkeeping through consumers.
-
-Use this for projection/reconciliation streams where each key needs ordered processing but different keys can run in parallel.
+For keyed work, preserve ordering within each key while allowing different keys to run concurrently. Prefer an existing named keyed-run helper; otherwise keep the required fiber bookkeeping in one named helper rather than scattering it through consumers. Choose queueing, replacement, or coalescing semantics from the owning operation's policy.
 
 ## Tests
 
-- Use `Stream.fromIterable(...)` for finite fixtures.
+- Use `Stream.fromIterable(...)` for finite fixtures; compose it with `Stream.concat(Stream.never)` when the fixture represents an open subscription.
 - Use `Stream.empty` for no events.
 - Use `Stream.fromQueue(...)` with a test-owned `Queue` when the test needs to drive events interactively.
-- Use `Stream.take(n)` plus `Stream.runCollect` for finite assertions.
-- Avoid real sleeps; coordinate with `Deferred`, `Queue`, `Latch`, and `TestClock`.
+- Bound open streams with `Stream.take(n)` before `Stream.runCollect`.
+
+For stream tests involving time or concurrency, read and apply [`effect-testing.md`](effect-testing.md) completely.
+
+## Completion Check
+
+The source matches the producer's delivery semantics; ordering and concurrency are explicit; every collected stream is finite; buffers have a bounded-growth policy; long-lived consumers have a scoped owner; queue, `PubSub`, and `SubscriptionRef` internals stay behind stream-facing service interfaces; and typed failures, defects, and interruption reach a boundary with an explicit policy.

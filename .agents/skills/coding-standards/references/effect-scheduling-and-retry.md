@@ -1,8 +1,6 @@
 # Scheduling And Retry
 
-Use this when writing retries, repeats, polling workers, backoff, jitter, rate-limit-aware policies, timeouts, or pass loops.
-
-Use `Schedule` for retry, polling, pacing, and repeated background work instead of hand-rolled `while (true)` loops with sleeps.
+Use `Schedule` to express retry, polling, pacing, and repeated background work.
 
 ## Core Rules
 
@@ -15,16 +13,17 @@ Use `Schedule` for retry, polling, pacing, and repeated background work instead 
 - Use `Schedule.exponential(...)` or `Schedule.fibonacci(...)` for backoff.
 - Add `Schedule.jittered` to avoid synchronized retry storms.
 - Use `Schedule.recurs(...)` for a counter schedule or `Schedule.upTo({ times })` to bound a delay schedule.
-- Use `Schedule.tap(({ input }) => ...)` to log retry inputs.
-- `Schedule.tap(...)` receives the full schedule metadata, including `input`, `output`, and `duration`.
-- Use `Schedule.setInputType<E>()` before input-dependent combinators when the input type would otherwise be `unknown`.
+- Use `Schedule.tapInput(...)` to log retry inputs.
+- Use `Schedule.tap(...)` when full schedule metadata matters.
 - Use `Effect.retryOrElse(...)` when exhausted retries need a fallback/reporting effect.
 - Retry only at the narrowest boundary with proven idempotency.
-- Exhausted failures should remain visible unless the boundary has a truthful fallback.
+- Keep exhausted failures visible unless the boundary has a truthful fallback.
+
+When retries can duplicate side effects, read [`workflows-transactions-and-idempotency.md`](workflows-transactions-and-idempotency.md) to choose the retry owner and safety guarantee.
 
 ## Polling Workers
 
-Prefer typed pass failures over cause recovery.
+Handle expected pass failures through the typed error channel.
 
 ```ts
 const pass = runPass().pipe(
@@ -47,7 +46,7 @@ const logNonInterruptCauseAndContinue = (message: string) =>
   );
 ```
 
-Do not catch causes just to make failures disappear. If only expected typed failures should be recoverable, use `Effect.catchIf(...)`, `Effect.catchFilter(...)`, `Effect.catchTag(...)`, or `Effect.retry(...)` on those typed errors instead.
+Recover expected typed failures with `Effect.catchIf(...)`, `Effect.catchFilter(...)`, `Effect.catchTag(...)`, or `Effect.retry(...)`.
 
 ## Per-Item Failure Isolation
 
@@ -70,31 +69,30 @@ yield *
   );
 ```
 
-Only do this when retrying the item later is truthful or skipping the item is the product policy.
+This isolation is truthful when the product policy retries the item later or deliberately skips it.
 
 ## Reusable Retry Policy
 
 ```ts
-const projectionRetrySchedule: Schedule.Schedule<unknown, ProjectionError> = Schedule.exponential(
-  "100 millis",
-).pipe(Schedule.jittered, Schedule.upTo({ times: 5 }));
+const reconciliationRetrySchedule: Schedule.Schedule<unknown, ReconciliationError> =
+  Schedule.exponential("100 millis").pipe(Schedule.jittered, Schedule.upTo({ times: 5 }));
 
 const reconcileWithRetry = (target: Target) =>
   reconcile(target).pipe(
-    Effect.retryOrElse(
-      projectionRetrySchedule.pipe(
-        Schedule.tap(({ input: error }) =>
-          Effect.logWarning("Agent.Projection.reconcile.retrying").pipe(
+    Effect.retry(
+      reconciliationRetrySchedule.pipe(
+        Schedule.tapInput((error) =>
+          Effect.logWarning("Agent.Reconciliation.retrying").pipe(
             Effect.annotateLogs({ operation: error.operation }),
           ),
         ),
       ),
-      (error) => Effect.logError("Agent.Projection.reconcile.stopped", error),
     ),
+    Effect.tapError((error) => Effect.logError("Agent.Reconciliation.stopped", error)),
   );
 ```
 
-Use this when the operation is idempotent and retry state is useful for logs or metrics.
+Use this shape when retry state is useful for logs or metrics. The final `tapError` reports exhaustion while preserving the typed failure.
 
 ## Rate-Limit-Aware Typed Retry
 
@@ -110,7 +108,6 @@ const providerRetrySchedule: Schedule.Schedule<RateLimited, RateLimited> = Sched
 ).pipe(
   Schedule.jittered,
   Schedule.upTo({ times: 5 }),
-  Schedule.setInputType<RateLimited>(),
   Schedule.passthrough,
   Schedule.modifyDelay(({ input, duration }) =>
     Effect.succeed(
@@ -122,12 +119,16 @@ const providerRetrySchedule: Schedule.Schedule<RateLimited, RateLimited> = Sched
 );
 ```
 
-Use this for operation-level retries over typed provider errors. For Effect HttpClient-level 429 handling and proactive pacing, read `HTTP_CLIENTS.md`.
+Use this for operation-level retries over typed provider errors. For Effect `HttpClient`-level 429 handling and proactive pacing, read [`effect-http-clients.md`](effect-http-clients.md).
 
 ## Timeouts And Delays
 
 - Use `Effect.timeout(...)` when the operation has a real deadline.
 - Use `Effect.delay(...)` when one operation should start later.
-- Use `Effect.sleep(...)` inside production workflows only when sleeping itself is the domain behavior.
-- Avoid manual sleep loops; use `Effect.repeat(...)` with `Schedule` for recurring work.
-- In tests, use `TestClock` rather than real time. Read `TESTING.md`.
+- Use `Effect.sleep(...)` when sleeping itself is the domain behavior.
+- Use `Effect.repeat(...)` with `Schedule` for recurring work.
+- In tests, control time with `TestClock`; read [`effect-testing.md`](effect-testing.md).
+
+## Completion Check
+
+Every retry and repetition has an explicit owner and termination policy, including intentional unbounded workers. Every retried side effect has a proven safety guarantee. Polling and batch workers state whether each expected failure continues, retries, skips, or stops. Exhausted failures remain typed and visible unless the owning boundary provides a truthful fallback. Time-based tests use deterministic clock control.

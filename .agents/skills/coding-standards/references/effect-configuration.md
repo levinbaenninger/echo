@@ -1,8 +1,8 @@
-# Config
+# Effect configuration
 
-Use this when reading runtime configuration, env vars, `.env` files, provider-specific settings, or writing `layerConfig(...)` helpers.
+This reference covers Effect `Config` recipes, providers, and config-backed Layers. For configuration ownership, startup failure handling, and resource lifecycle, also apply [`configuration-and-resources.md`](configuration-and-resources.md).
 
-Read runtime configuration through Effect `Config` recipes and provider layers, not direct `process.env` access inside application logic.
+Install environment-backed providers at the composition root, then read typed runtime configuration through Effect `Config` recipes.
 
 ```ts
 export const dataDirectoryConfig = Config.schema(AbsolutePath, "APP_DATA_DIR");
@@ -27,22 +27,22 @@ export const layerFromEnvironment = Layer.effect(
 - Use `Config.schema(...)` or `Config.mapOrFail(...)` for refined values.
 - Use `Config.option(...)` for semantic absence.
 - Use `Config.withDefault(...)` for missing-data defaults only; malformed values still fail.
-- Use `Config.orElse(...)` only when intentionally catching any config parse failure.
+- `Config.orElse(...)` catches any config parse failure; use it when every such failure should select the fallback.
 - Use `Config.unwrap(...)` / `Config.Wrap<T>` for `layerConfig(...)` helpers.
 
 ## Providers
 
 - Use `ConfigProvider.layer(provider)` to replace the active provider for an app or suite.
 - Use `ConfigProvider.layerAdd(provider)` for fallbacks; pass `{ asPrimary: true }` when the added provider must override the current provider.
-- Use `ConfigProvider.fromUnknown(...)` for deterministic test config.
 - Use `ConfigProvider.fromEnv(...)` for environment variables.
 - Use `ConfigProvider.constantCase` when camelCase schema keys should read `SCREAMING_SNAKE_CASE` env vars.
 - Use `ConfigProvider.nested(...)` to scope a provider under a prefix.
-- Treat `.env`, directory, and environment providers as startup/boundary sources, not business-workflow reads.
+
+For tests that supply configuration, follow [`effect-testing.md#configuration`](effect-testing.md#configuration).
 
 ## Layer Config Helpers
 
-Library-style layers often expose both concrete `layer(options)` and config-backed `layerConfig(options: Config.Wrap<Options>)`.
+A `layerConfig(options: Config.Wrap<Options>)` helper earns its place when callers need to compose runtime `Config` recipes. Keep `layer(options)` as the concrete constructor for callers that already have decoded options.
 
 ```ts
 export const layerConfig = (config: Config.Wrap<ClientOptions>) =>
@@ -55,6 +55,8 @@ export const layerConfig = (config: Config.Wrap<ClientOptions>) =>
   );
 ```
 
-Use this pattern when a service naturally supports runtime config while still allowing tests to pass concrete values.
+Expose only the constructor forms required by actual callers.
 
-Use `Layer.succeed(AppConfiguration.Service, testConfig)` when the app already wraps environment config in an application service and the test does not need to exercise Config decoding itself.
+## Completion check
+
+Every runtime value is decoded through a typed `Config` recipe; credentials use `Config.redacted`; defaults distinguish missing values from malformed values; every `Config.orElse` fallback intentionally covers all parse failures; provider replacement, fallback, and precedence are explicit; every `layerConfig` has a caller that composes `Config` recipes; and configuration tests follow the linked testing strategy.
