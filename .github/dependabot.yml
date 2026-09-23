@@ -9,3 +9,19 @@ updates:
     groups:
       github-actions:
         patterns: ["*"]
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      effect:
+        patterns: ["effect", "@effect/*"]
+      vite-plus:
+        patterns: ["vite-plus", "@voidzero-dev/*"]
+      alchemy:
+        patterns: ["alchemy", "@alchemy.run/*"]
+      drizzle:
+        patterns: ["drizzle-orm", "drizzle-kit"]
+      npm-dependencies:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
