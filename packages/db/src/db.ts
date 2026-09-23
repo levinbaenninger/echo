@@ -12,6 +12,7 @@ export const Db = Effect.gen(function* () {
   const project = yield* Neon.Project("echo", {
     region: "aws-eu-central-1",
   });
+
   const branch = yield* Neon.Branch("main", {
     project,
     migrations: schema,
@@ -22,6 +23,7 @@ export const Db = Effect.gen(function* () {
 
 export const Hyperdrive = Effect.gen(function* () {
   const { branch } = yield* Db;
+
   return yield* Cloudflare.Hyperdrive.Connection("hyperdrive", {
     origin: branch.origin,
     dev: branch.pooledOrigin,

@@ -5,6 +5,7 @@ import { RpcTest } from "effect/unstable/rpc";
 import { TaskOperationsLive } from "../operations";
 import { TaskStore, TaskStoreFailure } from "../persistence/store";
 import { TaskIdGenerationFailed, TaskIds } from "../ids";
+import { TaskNotFound } from "../task";
 import { knownId, TaskIdsTest, TaskStoreTest } from "../test-layers";
 import { TaskRpcs } from "./contract";
 import { TaskHandlers } from "./handlers";
@@ -34,6 +35,7 @@ it.effect("a task read failure has a safe RPC error", () => {
     message: "Task store failed during findById",
     cause: new Error("private database detail"),
   });
+
   const store = Layer.succeed(
     TaskStore,
     TaskStore.of({
@@ -41,6 +43,7 @@ it.effect("a task read failure has a safe RPC error", () => {
       insert: () => Effect.void,
     }),
   );
+
   return Effect.gen(function* () {
     const client = yield* RpcTest.makeClient(TaskRpcs);
     const error = yield* client.getTask({ id: knownId }).pipe(Effect.flip);
@@ -61,15 +64,12 @@ it.effect("a missing task remains a typed RPC error", () => {
       insert: () => Effect.void,
     }),
   );
+
   return Effect.gen(function* () {
     const client = yield* RpcTest.makeClient(TaskRpcs);
     const error = yield* client.getTask({ id: knownId }).pipe(Effect.flip);
 
-    expect(error).toMatchObject({
-      _tag: "TaskNotFound",
-      id: knownId,
-      message: "Task not found",
-    });
+    expect(error).toStrictEqual(new TaskNotFound({ id: knownId, message: "Task not found" }));
   }).pipe(Effect.provide(handlersFor(store)));
 });
 
@@ -88,6 +88,7 @@ it.effect("a task write failure does not expose database details", () => {
         ),
     }),
   );
+
   return Effect.gen(function* () {
     const client = yield* RpcTest.makeClient(TaskRpcs);
     const error = yield* client.createTask({ title: "Write tests" }).pipe(Effect.flip);

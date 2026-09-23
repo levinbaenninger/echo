@@ -31,6 +31,7 @@ export const CryptoTaskIds = Layer.effect(
             (cause) => new TaskIdGenerationFailed({ message: "Task ID generation failed", cause }),
           ),
         );
+
         return TaskId.make(uuid);
       }),
     });

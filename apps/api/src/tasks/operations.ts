@@ -34,15 +34,18 @@ export const TaskOperationsLive = Layer.effect(
     return TaskOperations.of({
       getTask: Effect.fn("Tasks.getTask")(function* (id: TaskId) {
         const task = yield* store.findById(id);
+
         if (Option.isNone(task)) {
           return yield* new TaskNotFound({ id, message: "Task not found" });
         }
+
         return task.value;
       }),
       createTask: Effect.fn("Tasks.createTask")(function* (input: CreateTaskInput) {
         const id = yield* ids.next();
         const task = Task.make({ id, title: input.title, completed: false });
         yield* store.insert(task);
+
         return task;
       }),
     });

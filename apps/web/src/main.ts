@@ -9,6 +9,7 @@ import { Button } from '@foldkit/ui'
 // MODEL
 
 export const Model = Schema.Struct({ count: Schema.Finite })
+
 export type Model = typeof Model.Type
 
 // MESSAGE
@@ -18,6 +19,7 @@ export const Message = defineMessageUnion({
   ClickedIncrement: {},
   ClickedReset: {},
 })
+
 export type Message = typeof Message.Type
 
 // UPDATE

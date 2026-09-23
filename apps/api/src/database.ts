@@ -13,5 +13,6 @@ export class Database extends Context.Service<
 /** Binds Hyperdrive and acquires the shared database handle during Worker initialization. */
 export const connectDatabase = Effect.gen(function* () {
   const hyperdrive = yield* Cloudflare.Hyperdrive.Connect(Hyperdrive);
+
   return yield* Drizzle.Postgres(hyperdrive.connectionString);
 }).pipe(Effect.provide(Cloudflare.Hyperdrive.ConnectBinding));

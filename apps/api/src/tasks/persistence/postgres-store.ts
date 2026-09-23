@@ -30,6 +30,7 @@ export const PostgresTaskStore = Layer.effect(
           );
 
         const row = rows[0];
+
         if (row === undefined) return Option.none();
 
         const task = yield* Schema.decodeEffect(Task)(row).pipe(
@@ -42,6 +43,7 @@ export const PostgresTaskStore = Layer.effect(
               }),
           ),
         );
+
         return Option.some(task);
       }),
       insert: Effect.fn("PostgresTaskStore.insert")(function* (task: Task) {

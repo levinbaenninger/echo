@@ -4,6 +4,7 @@ import { Effect, Layer } from "effect";
 import { TaskOperations, TaskOperationsLive } from "./operations";
 import { TaskStore, TaskStoreFailure } from "./persistence/store";
 import { TaskIdGenerationFailed, TaskIds } from "./ids";
+import { TaskNotFound } from "./task";
 import { knownId, TaskIdsTest, TaskStoreTest } from "./test-layers";
 
 const operationsFor = (
@@ -35,11 +36,7 @@ it.effect("a missing task returns its ID in a typed error", () => {
     const tasks = yield* TaskOperations;
     const error = yield* tasks.getTask(knownId).pipe(Effect.flip);
 
-    expect(error).toMatchObject({
-      _tag: "TaskNotFound",
-      id: knownId,
-      message: "Task not found",
-    });
+    expect(error).toStrictEqual(new TaskNotFound({ id: knownId, message: "Task not found" }));
   }).pipe(Effect.provide(operationsFor(store)));
 });
 
@@ -49,6 +46,7 @@ it.effect("a store read failure remains available to the caller", () => {
     message: "Task store read failed",
     cause: new Error("database unavailable"),
   });
+
   const store = Layer.succeed(
     TaskStore,
     TaskStore.of({
@@ -70,7 +68,9 @@ it.effect("an ID generation failure does not write a task", () => {
     message: "Task ID generation failed",
     cause: new Error("crypto unavailable"),
   });
+
   const failingIds = Layer.succeed(TaskIds, TaskIds.of({ next: () => Effect.fail(failure) }));
+
   const store = Layer.succeed(
     TaskStore,
     TaskStore.of({
@@ -93,6 +93,7 @@ it.effect("a store write failure remains available to the caller", () => {
     message: "Task store write failed",
     cause: new Error("database unavailable"),
   });
+
   const store = Layer.succeed(
     TaskStore,
     TaskStore.of({

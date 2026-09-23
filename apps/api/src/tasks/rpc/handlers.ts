@@ -8,6 +8,7 @@ import { CreateTaskFailed, GetTaskFailed, TaskRpcs } from "./contract";
 export const TaskHandlers = TaskRpcs.toLayer(
   Effect.gen(function* () {
     const tasks = yield* TaskOperations;
+
     return {
       getTask: Effect.fn("TaskRpcs.getTask")(function* ({ id }: { id: TaskId }) {
         return yield* tasks
