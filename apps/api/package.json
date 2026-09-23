@@ -12,6 +12,9 @@
       "import": "./src/rpc.ts"
     }
   },
+  "scripts": {
+    "test": "vp test"
+  },
   "dependencies": {
     "@echo/db": "workspace:*",
     "@effect/platform-browser": "4.0.0-rc.115",
