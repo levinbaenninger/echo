@@ -1,0 +1,13 @@
+name: Setup
+description: Install Vite+, Node.js, pnpm, and workspace dependencies.
+
+runs:
+  using: composite
+  steps:
+    - uses: voidzero-dev/setup-vp@3754dd7dbdb32bd8f6d28b6043de13ad3a75f21f # v1.21.1
+      with:
+        node-version: "24"
+        cache: true
+
+    - run: vp install
+      shell: bash

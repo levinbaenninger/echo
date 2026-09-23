@@ -1,0 +1,99 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: check-${{ github.ref }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: ./.github/actions/setup
+
+      # Format, lint, and type check (vite.config.ts enables typeAware + typeCheck).
+      - run: vp check
+
+      - run: vp run -r test
+
+      - run: vp run -r build
+
+      # Drizzle.Schema regenerates migrations during deploy; a migration generated in CI never reaches git.
+      - name: Check migrations are committed
+        run: |
+          vp exec -F @echo/db drizzle-kit generate --dialect postgresql --schema ./src/schema.ts --out ./migrations
+          if [ -n "$(git status --porcelain packages/db/migrations)" ]; then
+            git status --porcelain packages/db/migrations
+            echo "::error::packages/db/src/schema.ts changed without a committed migration. Run the same drizzle-kit generate locally and commit the result."
+            exit 1
+          fi
+
+  preview:
+    name: Deploy preview
+    needs: check
+    # Fork PRs get no secrets, so they skip previews.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      pull-requests: write
+    # Shared with preview-cleanup.yml. Never cancel an apply mid-flight: it can leave cloud resources out of sync with state.
+    concurrency:
+      group: alchemy-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: false
+    env:
+      STAGE: pr-${{ github.event.pull_request.number }}
+      PULL_REQUEST: ${{ github.event.pull_request.number }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: ./.github/actions/setup
+
+      - run: vp exec alchemy provider check-env
+
+      - run: vp exec alchemy deploy --stage "$STAGE" --yes
+
+  production:
+    name: Deploy production
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: alchemy-prod
+      cancel-in-progress: false
+    env:
+      STAGE: prod
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: ./.github/actions/setup
+
+      - run: vp exec alchemy provider check-env
+
+      - run: vp exec alchemy deploy --stage "$STAGE" --yes
