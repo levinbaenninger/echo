@@ -9,8 +9,8 @@ catalog:
   "@effect/platform-node": ^4.0.0-rc.115
   "@effect/sql-pg": 4.0.0-rc.115
   "@effect/vitest": 4.0.0-rc.115
-  "@oxlint/plugins": 1.81.0
-  "@types/node": ^24
+  "@oxlint/plugins": 1.85.0
+  "@types/node": ^26
   "@types/pg": ^8.23.1
   drizzle-kit: 1.0.0-rc.5-ab785fc
   drizzle-orm: 1.0.0-rc.5-ab785fc
