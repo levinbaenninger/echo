@@ -12,8 +12,8 @@ catalog:
   "@oxlint/plugins": 1.81.0
   "@types/node": ^24
   "@types/pg": ^8.23.1
-  drizzle-kit: 1.0.0-rc.5-ab785fc
-  drizzle-orm: 1.0.0-rc.5-ab785fc
+  drizzle-kit: 1.0.0-rc.5-5935859
+  drizzle-orm: 1.0.0-rc.5-5935859
   effect: 4.0.0-rc.115
   pg: ^8.23.0
   typescript: ^7.0.2
