@@ -18,7 +18,7 @@ catalog:
   pg: ^8.23.0
   typescript: ^7.0.2
   vite: npm:@voidzero-dev/vite-plus-core@0.3.1
-  vite-plus: 0.3.1
+  vite-plus: 0.3.3
 allowBuilds:
   esbuild: true
   msgpackr-extract: false
