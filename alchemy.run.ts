@@ -23,6 +23,15 @@ export default Alchemy.Stack(
 
     const website = yield* Cloudflare.Website.Foldkit("Website", {
       rootDir: "apps/web",
+      // VITE_-prefixed env is inlined into the client bundle as import.meta.env.VITE_API_URL.
+      env: {
+        VITE_API_URL: Output.map(api.url, (url) => {
+          if (url === undefined)
+            throw new Error("API Worker has no public URL for the website to call");
+
+          return url;
+        }),
+      },
     });
 
     // Preview deploys from .github/workflows/ci.yml export PULL_REQUEST; the comment keeps one logical ID so each push edits it in place.

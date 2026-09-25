@@ -9,6 +9,7 @@
     "test": "vp test"
   },
   "dependencies": {
+    "@echo/api": "workspace:*",
     "@effect/platform-browser": "4.0.0-rc.115",
     "@foldkit/ui": "0.160.0",
     "effect": "catalog:",

@@ -277,6 +277,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@echo/api':
+        specifier: workspace:*
+        version: link:../api
       '@effect/platform-browser':
         specifier: 4.0.0-rc.115
         version: 4.0.0-rc.115(effect@4.0.0-rc.115)
