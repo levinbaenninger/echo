@@ -6,8 +6,8 @@ import { TaskOperationsLive } from "../operations";
 import { TaskStore, TaskStoreFailure } from "../persistence/store";
 import { TaskIdGenerationFailed, TaskIds } from "../ids";
 import { TaskNotFound } from "../task";
-import { knownId, TaskIdsTest, TaskStoreTest } from "../test-layers";
-import { TaskRpcs } from "./contract";
+import { knownId, TaskIdsTest, taskStoreWith, TaskStoreTest } from "../test-layers";
+import { DeleteTaskFailed, ListTasksFailed, TaskRpcs, UpdateTaskFailed } from "./contract";
 import { TaskHandlers } from "./handlers";
 
 const handlersFor = (
@@ -36,13 +36,9 @@ it.effect("a task read failure has a safe RPC error", () => {
     cause: new Error("private database detail"),
   });
 
-  const store = Layer.succeed(
-    TaskStore,
-    TaskStore.of({
-      findById: () => Effect.fail(failure),
-      insert: () => Effect.void,
-    }),
-  );
+  const store = taskStoreWith({
+    findById: () => Effect.fail(failure),
+  });
 
   return Effect.gen(function* () {
     const client = yield* RpcTest.makeClient(TaskRpcs);
@@ -57,13 +53,7 @@ it.effect("a task read failure has a safe RPC error", () => {
 });
 
 it.effect("a missing task remains a typed RPC error", () => {
-  const store = Layer.succeed(
-    TaskStore,
-    TaskStore.of({
-      findById: () => Effect.succeedNone,
-      insert: () => Effect.void,
-    }),
-  );
+  const store = taskStoreWith({});
 
   return Effect.gen(function* () {
     const client = yield* RpcTest.makeClient(TaskRpcs);
@@ -74,20 +64,16 @@ it.effect("a missing task remains a typed RPC error", () => {
 });
 
 it.effect("a task write failure does not expose database details", () => {
-  const store = Layer.succeed(
-    TaskStore,
-    TaskStore.of({
-      findById: () => Effect.succeedNone,
-      insert: () =>
-        Effect.fail(
-          new TaskStoreFailure({
-            operation: "insert",
-            message: "Task store write failed",
-            cause: new Error("private database detail"),
-          }),
-        ),
-    }),
-  );
+  const store = taskStoreWith({
+    insert: () =>
+      Effect.fail(
+        new TaskStoreFailure({
+          operation: "insert",
+          message: "Task store write failed",
+          cause: new Error("private database detail"),
+        }),
+      ),
+  });
 
   return Effect.gen(function* () {
     const client = yield* RpcTest.makeClient(TaskRpcs);
@@ -125,4 +111,67 @@ it.effect("an ID generation failure has a safe RPC error", () => {
     const serialized = yield* Schema.encodeEffect(Schema.fromJsonString(Schema.Unknown))(error);
     expect(serialized).not.toContain("private crypto detail");
   }).pipe(Effect.provide(handlersFor(TaskStoreTest, failingIds)));
+});
+
+it.effect("tasks can be listed, updated, and deleted through the public RPC", () => {
+  return Effect.gen(function* () {
+    const client = yield* RpcTest.makeClient(TaskRpcs);
+    const created = yield* client.createTask({ title: "Write tests" });
+
+    expect(yield* client.listTasks()).toEqual([created]);
+
+    const updated = yield* client.updateTask({ id: created.id, title: "Ship it", completed: true });
+    expect(updated).toEqual({ id: knownId, title: "Ship it", completed: true });
+    expect(yield* client.listTasks()).toEqual([updated]);
+
+    yield* client.deleteTask({ id: created.id });
+    expect(yield* client.listTasks()).toEqual([]);
+  }).pipe(Effect.provide(handlersFor()));
+});
+
+it.effect("updating or deleting a missing task is a typed RPC error", () => {
+  return Effect.gen(function* () {
+    const client = yield* RpcTest.makeClient(TaskRpcs);
+    const notFound = new TaskNotFound({ id: knownId, message: "Task not found" });
+
+    const updateError = yield* client
+      .updateTask({ id: knownId, title: "Ship it", completed: true })
+      .pipe(Effect.flip);
+
+    const deleteError = yield* client.deleteTask({ id: knownId }).pipe(Effect.flip);
+
+    expect(updateError).toStrictEqual(notFound);
+    expect(deleteError).toStrictEqual(notFound);
+  }).pipe(Effect.provide(handlersFor()));
+});
+
+it.effect("store failures while listing, updating, and deleting have safe RPC errors", () => {
+  const failure = (operation: "list" | "update" | "remove") =>
+    new TaskStoreFailure({
+      operation,
+      message: "Task store failed",
+      cause: new Error("private database detail"),
+    });
+
+  const store = taskStoreWith({
+    list: Effect.fail(failure("list")),
+    update: () => Effect.fail(failure("update")),
+    remove: () => Effect.fail(failure("remove")),
+  });
+
+  return Effect.gen(function* () {
+    const client = yield* RpcTest.makeClient(TaskRpcs);
+
+    const listError = yield* client.listTasks().pipe(Effect.flip);
+
+    const updateError = yield* client
+      .updateTask({ id: knownId, title: "Ship it", completed: true })
+      .pipe(Effect.flip);
+
+    const deleteError = yield* client.deleteTask({ id: knownId }).pipe(Effect.flip);
+
+    expect(listError).toStrictEqual(new ListTasksFailed({ message: "Unable to load tasks" }));
+    expect(updateError).toStrictEqual(new UpdateTaskFailed({ message: "Unable to update task" }));
+    expect(deleteError).toStrictEqual(new DeleteTaskFailed({ message: "Unable to delete task" }));
+  }).pipe(Effect.provide(handlersFor(store)));
 });

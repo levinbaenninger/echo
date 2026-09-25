@@ -6,6 +6,9 @@ export const TaskId = Schema.String.check(Schema.isUUID(4)).pipe(Schema.brand("T
 /** A parsed task identifier. */
 export type TaskId = typeof TaskId.Type;
 
+/** A title accepted when a task is created or edited: trimmed, non-empty, at most 200 characters. */
+export const TaskTitle = Schema.Trimmed.check(Schema.isNonEmpty(), Schema.isMaxLength(200));
+
 /** A task returned by task operations and RPC. */
 export const Task = Schema.Struct({
   id: TaskId,

@@ -1,10 +1,22 @@
 import { Tasks } from "@echo/db";
-import { eq } from "drizzle-orm";
-import { Effect, Layer, Option, Schema } from "effect";
+import { asc, eq } from "drizzle-orm";
+import { Array, Effect, Layer, Schema } from "effect";
 
 import { Database } from "../../database";
 import { Task, type TaskId } from "../task";
 import { TaskStore, TaskStoreFailure } from "./store";
+
+type StoreOperation = TaskStoreFailure["operation"];
+
+const failWith =
+  (operation: StoreOperation, message: string) =>
+  <A, E, R>(effect: Effect.Effect<A, E, R>) =>
+    effect.pipe(Effect.mapError((cause) => new TaskStoreFailure({ operation, message, cause })));
+
+const decodeTasks = (operation: StoreOperation, rows: ReadonlyArray<typeof Tasks.$inferSelect>) =>
+  Schema.decodeEffect(Schema.Array(Task))(rows).pipe(
+    failWith(operation, "Task record could not be parsed"),
+  );
 
 /** Postgres-backed task persistence with row validation on reads. */
 export const PostgresTaskStore = Layer.effect(
@@ -18,48 +30,44 @@ export const PostgresTaskStore = Layer.effect(
           .select()
           .from(Tasks)
           .where(eq(Tasks.id, id))
-          .pipe(
-            Effect.mapError(
-              (cause) =>
-                new TaskStoreFailure({
-                  operation: "findById",
-                  message: "Task store read failed",
-                  cause,
-                }),
-            ),
-          );
+          .pipe(failWith("findById", "Task store read failed"));
 
-        const row = rows[0];
+        const tasks = yield* decodeTasks("findById", rows);
 
-        if (row === undefined) return Option.none();
-
-        const task = yield* Schema.decodeEffect(Task)(row).pipe(
-          Effect.mapError(
-            (cause) =>
-              new TaskStoreFailure({
-                operation: "findById",
-                message: "Task record could not be parsed",
-                cause,
-              }),
-          ),
-        );
-
-        return Option.some(task);
+        return Array.head(tasks);
       }),
+      list: Effect.gen(function* () {
+        const rows = yield* db
+          .select()
+          .from(Tasks)
+          .orderBy(asc(Tasks.title), asc(Tasks.id))
+          .pipe(failWith("list", "Task store read failed"));
+
+        return yield* decodeTasks("list", rows);
+      }).pipe(Effect.withSpan("PostgresTaskStore.list")),
       insert: Effect.fn("PostgresTaskStore.insert")(function* (task: Task) {
-        yield* db
-          .insert(Tasks)
-          .values(task)
-          .pipe(
-            Effect.mapError(
-              (cause) =>
-                new TaskStoreFailure({
-                  operation: "insert",
-                  message: "Task store write failed",
-                  cause,
-                }),
-            ),
-          );
+        yield* db.insert(Tasks).values(task).pipe(failWith("insert", "Task store write failed"));
+      }),
+      update: Effect.fn("PostgresTaskStore.update")(function* (task: Task) {
+        const rows = yield* db
+          .update(Tasks)
+          .set({ title: task.title, completed: task.completed })
+          .where(eq(Tasks.id, task.id))
+          .returning()
+          .pipe(failWith("update", "Task store write failed"));
+
+        const tasks = yield* decodeTasks("update", rows);
+
+        return Array.head(tasks);
+      }),
+      remove: Effect.fn("PostgresTaskStore.remove")(function* (id: TaskId) {
+        const rows = yield* db
+          .delete(Tasks)
+          .where(eq(Tasks.id, id))
+          .returning({ id: Tasks.id })
+          .pipe(failWith("remove", "Task store write failed"));
+
+        return Array.isReadonlyArrayNonEmpty(rows);
       }),
     });
   }),
