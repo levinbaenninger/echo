@@ -165,14 +165,14 @@ settings:
 catalogs:
   default:
     '@effect/platform-node':
-      specifier: ^4.0.0-rc.115
-      version: 4.0.0-rc.115
+      specifier: ^4.0.0-rc.118
+      version: 4.0.0-rc.118
     '@effect/sql-pg':
-      specifier: 4.0.0-rc.115
-      version: 4.0.0-rc.115
+      specifier: 4.0.0-rc.118
+      version: 4.0.0-rc.118
     '@effect/vitest':
-      specifier: 4.0.0-rc.115
-      version: 4.0.0-rc.115
+      specifier: 4.0.0-rc.118
+      version: 4.0.0-rc.118
     '@oxlint/plugins':
       specifier: 1.81.0
       version: 1.81.0
@@ -186,8 +186,8 @@ catalogs:
       specifier: 1.0.0-rc.5-ab785fc
       version: 1.0.0-rc.5-ab785fc
     effect:
-      specifier: 4.0.0-rc.115
-      version: 4.0.0-rc.115
+      specifier: 4.0.0-rc.118
+      version: 4.0.0-rc.118
     pg:
       specifier: ^8.23.0
       version: 8.23.0
@@ -203,7 +203,7 @@ catalogs:
 
 overrides:
   '@effect/vitest>vitest': '-'
-  '@effect/sql-pg@*': 4.0.0-rc.115
+  '@effect/sql-pg@*': 4.0.0-rc.118
   vite@*: npm:@voidzero-dev/vite-plus-core@0.3.1
 
 packageExtensionsChecksum: sha256-/gSRCm1KhNYvpDsEGQoijCscbEaKGMbXN2MppXFz93Q=
@@ -220,20 +220,20 @@ importers:
         version: link:apps/api
       '@effect/platform-node':
         specifier: 'catalog:'
-        version: 4.0.0-rc.115(effect@4.0.0-rc.115)(redis@6.2.1)
+        version: 4.0.0-rc.118(effect@4.0.0-rc.118)(redis@6.2.1)
       alchemy:
         specifier: 2.0.0-beta.79
-        version: 2.0.0-beta.79(@effect/platform-node@4.0.0-rc.115(effect@4.0.0-rc.115)(redis@6.2.1))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(drizzle-kit@1.0.0-rc.5-ab785fc)(drizzle-orm@1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.115))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.115)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5))(effect@4.0.0-rc.115)(pg@8.23.0)(typescript@7.0.2)(ws@8.21.3)
+        version: 2.0.0-beta.79(@effect/platform-node@4.0.0-rc.118(effect@4.0.0-rc.118)(redis@6.2.1))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(drizzle-kit@1.0.0-rc.5-ab785fc)(drizzle-orm@1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.118))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.118))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.118)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5))(effect@4.0.0-rc.118)(pg@8.23.0)(typescript@7.0.2)(ws@8.21.3)
       effect:
         specifier: 'catalog:'
-        version: 4.0.0-rc.115
+        version: 4.0.0-rc.118
     devDependencies:
       '@effect/tsgo':
-        specifier: 0.45.0
-        version: 0.45.0
+        specifier: 0.46.1
+        version: 0.46.1
       '@foldkit/oxlint-plugin':
         specifier: 0.13.0
-        version: 0.13.0(effect@4.0.0-rc.115)
+        version: 0.13.0(effect@4.0.0-rc.118)
       '@oxlint/plugins':
         specifier: 'catalog:'
         version: 1.81.0
@@ -253,21 +253,21 @@ importers:
         specifier: workspace:*
         version: link:../../packages/db
       '@effect/platform-browser':
-        specifier: 4.0.0-rc.115
-        version: 4.0.0-rc.115(effect@4.0.0-rc.115)
+        specifier: 4.0.0-rc.118
+        version: 4.0.0-rc.118(effect@4.0.0-rc.118)
       alchemy:
         specifier: 2.0.0-beta.79
-        version: 2.0.0-beta.79(@effect/platform-node@4.0.0-rc.115(effect@4.0.0-rc.115)(redis@6.2.1))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(drizzle-kit@1.0.0-rc.5-ab785fc)(drizzle-orm@1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.115))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.115)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5))(effect@4.0.0-rc.115)(pg@8.23.0)(typescript@7.0.2)(ws@8.21.3)
+        version: 2.0.0-beta.79(@effect/platform-node@4.0.0-rc.118(effect@4.0.0-rc.118)(redis@6.2.1))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(drizzle-kit@1.0.0-rc.5-ab785fc)(drizzle-orm@1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.118))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.118))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.118)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5))(effect@4.0.0-rc.118)(pg@8.23.0)(typescript@7.0.2)(ws@8.21.3)
       drizzle-orm:
         specifier: 'catalog:'
-        version: 1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.115))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.115)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5)
+        version: 1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.118))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.118))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.118)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5)
       effect:
         specifier: 'catalog:'
-        version: 4.0.0-rc.115
+        version: 4.0.0-rc.118
     devDependencies:
       '@effect/vitest':
         specifier: 'catalog:'
-        version: 4.0.0-rc.115(patch_hash=4a8ec7b568524d3c7e832c6f1cf843e09af90dd29542b0ba512d7f54ebbdd52f)(effect@4.0.0-rc.115)
+        version: 4.0.0-rc.118(effect@4.0.0-rc.118)
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
@@ -281,27 +281,27 @@ importers:
         specifier: workspace:*
         version: link:../api
       '@effect/platform-browser':
-        specifier: 4.0.0-rc.115
-        version: 4.0.0-rc.115(effect@4.0.0-rc.115)
+        specifier: 4.0.0-rc.118
+        version: 4.0.0-rc.118(effect@4.0.0-rc.118)
       '@foldkit/ui':
         specifier: 0.160.0
-        version: 0.160.0(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115))
+        version: 0.160.0(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118))
       effect:
         specifier: 'catalog:'
-        version: 4.0.0-rc.115
+        version: 4.0.0-rc.118
       foldkit:
         specifier: 0.160.0
-        version: 0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115)
+        version: 0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118)
     devDependencies:
       '@foldkit/devtools':
         specifier: 0.160.0
-        version: 0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(@foldkit/ui@0.160.0(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115)))(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115))
+        version: 0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(@foldkit/ui@0.160.0(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118)))(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118))
       '@foldkit/devtools-mcp':
         specifier: 0.20.0
-        version: 0.20.0(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115))(zod@4.6.5)
+        version: 0.20.0(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118))(zod@4.6.5)
       '@foldkit/vite-plugin':
         specifier: 0.22.0
-        version: 0.22.0(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115))
+        version: 0.22.0(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118))
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))
@@ -325,16 +325,16 @@ importers:
     dependencies:
       '@effect/sql-pg':
         specifier: 'catalog:'
-        version: 4.0.0-rc.115(effect@4.0.0-rc.115)
+        version: 4.0.0-rc.118(effect@4.0.0-rc.118)
       alchemy:
         specifier: 2.0.0-beta.79
-        version: 2.0.0-beta.79(@effect/platform-node@4.0.0-rc.115(effect@4.0.0-rc.115)(redis@6.2.1))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(drizzle-kit@1.0.0-rc.5-ab785fc)(drizzle-orm@1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.115))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.115)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5))(effect@4.0.0-rc.115)(pg@8.23.0)(typescript@7.0.2)(ws@8.21.3)
+        version: 2.0.0-beta.79(@effect/platform-node@4.0.0-rc.118(effect@4.0.0-rc.118)(redis@6.2.1))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(drizzle-kit@1.0.0-rc.5-ab785fc)(drizzle-orm@1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.118))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.118))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.118)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5))(effect@4.0.0-rc.118)(pg@8.23.0)(typescript@7.0.2)(ws@8.21.3)
       drizzle-orm:
         specifier: 'catalog:'
-        version: 1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.115))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.115)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5)
+        version: 1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.118))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.118))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.118)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5)
       effect:
         specifier: 'catalog:'
-        version: 4.0.0-rc.115
+        version: 4.0.0-rc.118
       pg:
         specifier: 'catalog:'
         version: 8.23.0
@@ -588,22 +588,22 @@ packages:
   '@drizzle-team/brocli@0.12.1':
     resolution: {integrity: sha512-yHwomvolVafvUXhy5TdiJVkuNCxXn+bKOs2aWiWEQh/5YaV97Oa/abJz3dmx7lxgIUsUlS1Jl4mEfvJPo3YsVw==}
 
-  '@effect/platform-browser@4.0.0-rc.115':
-    resolution: {integrity: sha512-RwpnxRYSBHBL1HYYlRwIrwz0+1hwmn5RvgqkKI0Tb+ChOIR9UCMpXsAhnwQcGP+mBidrC7dlloL42poGHZW4yw==}
+  '@effect/platform-browser@4.0.0-rc.118':
+    resolution: {integrity: sha512-X0UnkYh76kFU8/qpqh5FNgqDEuZI1GWA/ZxvA9NOUBYN/e3mBJCzjWHa1XeRwtn7xSiKlZcY/vyReLFbbjcHlg==}
     peerDependencies:
-      effect: ^4.0.0-rc.115
+      effect: ^4.0.0-rc.118
 
-  '@effect/platform-node-shared@4.0.0-rc.115':
-    resolution: {integrity: sha512-rcBwhDIfb82akJoTv7Vwh8K5x9vC/XfuePS7JjOr+z+dORXzsmKqI1BUQF27ARCN9fTAbDh7I6YvBlWhLjnqNg==}
+  '@effect/platform-node-shared@4.0.0-rc.118':
+    resolution: {integrity: sha512-pNbmIlxbAUxAthUNsp2xm1NLG9kxoYecsPkoYl9mNF2oxPcKDxAvkOar7tYnLSUpXJeATm4pxYVipdZjQfqO4Q==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      effect: ^4.0.0-rc.115
+      effect: ^4.0.0-rc.118
 
-  '@effect/platform-node@4.0.0-rc.115':
-    resolution: {integrity: sha512-mW03Wjq2FiTL5oi9yOkaKpCyUNBaduKgTk7qMHNELvC21Jq2qOAfdsfH+p+s2zmpB9w2RSa+ApODv4WjO9wQfw==}
+  '@effect/platform-node@4.0.0-rc.118':
+    resolution: {integrity: sha512-qdAxPZ+5bKxVnzkwziqcHZTHRHz2hyfFX6NhwEmm75CBpmaIzXIZR2LRqGd1/8eI3J3cOrXcAYzByhln7T1/EA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      effect: ^4.0.0-rc.115
+      effect: ^4.0.0-rc.118
       redis: '>=5.0.0 <7.0.0'
 
   '@effect/sql-d1@4.0.0-rc.115':
@@ -611,59 +611,64 @@ packages:
     peerDependencies:
       effect: ^4.0.0-rc.115
 
-  '@effect/sql-pg@4.0.0-rc.115':
-    resolution: {integrity: sha512-TLdzqBvGF/HwAKpWTw/5ih7JqVkkakVSb4aD6amzMaavFfFl4vsqqeKjSBijwuzbOMANNN0HqnEt/9fgjTsFEA==}
+  '@effect/sql-pg@4.0.0-rc.118':
+    resolution: {integrity: sha512-aNl7fRpnu7o4TXIKr/Awzty1MwOss6o1uyRLrS416ouMTSRrItI/qIs4YNbtXIcLoMOny2HW3f2uE6A6/684cA==}
     peerDependencies:
-      effect: ^4.0.0-rc.115
+      effect: ^4.0.0-rc.118
 
   '@effect/sql-sqlite-do@4.0.0-rc.115':
     resolution: {integrity: sha512-7lH9h+w4DW2tI+dus4hEac5mSCy1wgiT+uw/VvjR8YhNDemd3zEFY03NkbD81ipfOpnu2QA1YwgM58ExyPlhug==}
     peerDependencies:
       effect: ^4.0.0-rc.115
 
-  '@effect/tsgo-darwin-arm64@0.45.0':
-    resolution: {integrity: sha512-WUoiEVcm8E19QK6fl63lsssM4dkT9IFnULbmqQ6LBfv7H9uRkpE9S3thj8ZtZ+vl/QY8atwfuaTf+3A1m/kGtQ==}
+  '@effect/tsgo-darwin-arm64@0.46.1':
+    resolution: {integrity: sha512-ErehNqI9p8me4XKO8N4bzdDWgBbSNlJ3CIZGfXoAW6Fo4Oo7x4ZbZV7KNsMSn9aJSiUUOQUoXjGBdslU5OYMdw==}
     cpu: [arm64]
     os: [darwin]
 
-  '@effect/tsgo-darwin-x64@0.45.0':
-    resolution: {integrity: sha512-s3yz7ZfIzvObXJ/r5xd9sEPxHKC3L+D+yedS1BV2Kpn47Je2svYCNYKxzXIpqFLkNjK+RcOQrcfYbYEpKZZa6g==}
+  '@effect/tsgo-darwin-x64@0.46.1':
+    resolution: {integrity: sha512-zsQI1gjGMYF/C2FWDUwbStBAf0tJDVgXeWwTAZ+VUiNY06fR1SrZHK0L+22PE49Nim3biWK2h+XXRFVzql+ojg==}
     cpu: [x64]
     os: [darwin]
 
-  '@effect/tsgo-linux-arm64@0.45.0':
-    resolution: {integrity: sha512-N+lyzixtylOOn49demDaqg0kb/U8ISxM10Gphs1pIMSGlqlfqC4inYEoFpYej+f4T/cRlkA11Ue7wJzNz83ePA==}
+  '@effect/tsgo-linux-arm64@0.46.1':
+    resolution: {integrity: sha512-e283BZEQC3mJpk1N7vdUhoF/aYHc4YwCE/fwz/80d11OSvG35U+c49grxS7V7+dAl2ld6QiT8D1rcL8PYu8DLQ==}
     cpu: [arm64]
     os: [linux]
 
-  '@effect/tsgo-linux-arm@0.45.0':
-    resolution: {integrity: sha512-f6zL6YbWA9lXdfJ//KOjUz/U3CdGtajKi5NsR/lcQaKfZiJwHfeeLBB3yetF3qbPGSA149/kuMoDMWL13RUH3A==}
+  '@effect/tsgo-linux-arm@0.46.1':
+    resolution: {integrity: sha512-Y12wOcJ6HgwiCgg/oDQH4tdRQKRsWnul/KjCOwMxzVT4kO+ndczu1sKUZT+qIxV7qNk4Sq+uSWKEnFBA3ETI8w==}
     cpu: [arm]
     os: [linux]
 
-  '@effect/tsgo-linux-x64@0.45.0':
-    resolution: {integrity: sha512-aWt0G8celAxJOis4+xiILkyMP/3J+vukimUhSoCmUAPt8zoT9qhZcN64XYZE7jfqp88ByRdgN9GK1/C7YfPtcQ==}
+  '@effect/tsgo-linux-x64@0.46.1':
+    resolution: {integrity: sha512-NYGBC3Scfo9yZJfs7cg0KMcHgtukJ4+xff18nqIrON9Zzc/qD6w1AwEwYKYCsbai5hTQBb3VLIWmHM8BJ54WJg==}
     cpu: [x64]
     os: [linux]
 
-  '@effect/tsgo-win32-arm64@0.45.0':
-    resolution: {integrity: sha512-EAdeV366ja+M4XCx6xjXMv4Xkc0Fgzy4bapa0saDWcGhllNLqJDfOk4lk0BgAEjBUI8+0xC+PXKVB5SMz4EpVA==}
+  '@effect/tsgo-win32-arm64@0.46.1':
+    resolution: {integrity: sha512-MK93SN9qjowrCjch+2wGGncd6Y7KgDyJvLKVVFCJV8cPpHoL3xDCpxFCGqQWe120mVpLmnzbM2evKdh0M5l5PA==}
     cpu: [arm64]
     os: [win32]
 
-  '@effect/tsgo-win32-x64@0.45.0':
-    resolution: {integrity: sha512-1Hsr/sT5dmIafoY9L0ASJo4VqGyPNzM1nwTb4Wj1Lmjq6kGuwO/PVozFg3WZZ0piChFmgiU3nx1AKZfyqgjGUw==}
+  '@effect/tsgo-win32-x64@0.46.1':
+    resolution: {integrity: sha512-hlRbeNlp0N/dfZZFl+xVzT3XfHYqPmkXzCadR6e5yoe/vyA3O9RnO5UrOBHsXvL2RTE6hrh8bRfx2Uu6g3LL5w==}
     cpu: [x64]
     os: [win32]
 
-  '@effect/tsgo@0.45.0':
-    resolution: {integrity: sha512-gPG0ixVHgtYBUe5DbKX9vzHlhqd9+ZEfs4m/XWy0808av0A2XqMzaG3F5rnPBN7EUJRPlo9TluIi8WHx/pBV+A==}
+  '@effect/tsgo@0.46.1':
+    resolution: {integrity: sha512-DMcBCg5nWLufejRlyqFEkXmbtaLUJ56NKny6L1LTtimvz0U3VNj9H6ZUXV4WeeWvJzVyL0y7G2wsCBAFUgy1jw==}
     hasBin: true
 
   '@effect/vitest@4.0.0-rc.115':
     resolution: {integrity: sha512-DJR0hfdr3HNXAkzW8AzfvUz6VmrNFLrKk9tZGDURi33faMyxkc7ZewxELMMZwGpOTGN4mfqYVbX2CXgI+ZJBeQ==}
     peerDependencies:
       effect: ^4.0.0-rc.115
+
+  '@effect/vitest@4.0.0-rc.118':
+    resolution: {integrity: sha512-O0CPgtFVhkB+pyFtjP4up2XF4uVWsPgUmlv4hMjq8ARLOPKYix+uu3AUFIUKRHjzzQpx+JPce6KPhD6Flkrfag==}
+    peerDependencies:
+      effect: ^4.0.0-rc.118
 
   '@electric-sql/pglite-socket@0.0.20':
     resolution: {integrity: sha512-J5nLGsicnD9wJHnno9r+DGxfcZWh+YJMCe0q/aCgtG6XOm9Z7fKeite8IZSNXgZeGltSigM9U/vAWZQWdgcSFg==}
@@ -2275,7 +2280,7 @@ packages:
       '@effect/platform-bun': '>=4.0.0-rc.115 || >=4.0.0'
       '@effect/platform-node': '>=4.0.0-rc.115 || >=4.0.0'
       '@effect/sql-mysql2': '>=4.0.0-rc.115 || >=4.0.0'
-      '@effect/sql-pg': 4.0.0-rc.115
+      '@effect/sql-pg': 4.0.0-rc.118
       '@vercel/nft': ^1.10.2
       drizzle-kit: 1.0.0-rc.5-ab785fc
       drizzle-orm: 1.0.0-rc.5-ab785fc
@@ -2480,7 +2485,7 @@ packages:
       '@effect/sql-d1': '>=4.0.0-beta.105 || >=4.0.0'
       '@effect/sql-libsql': '>=4.0.0-beta.105 || >=4.0.0'
       '@effect/sql-mysql2': '>=4.0.0-beta.105 || >=4.0.0'
-      '@effect/sql-pg': 4.0.0-rc.115
+      '@effect/sql-pg': 4.0.0-rc.118
       '@effect/sql-pglite': '>=4.0.0-beta.105 || >=4.0.0'
       '@effect/sql-sqlite-bun': '>=4.0.0-beta.105 || >=4.0.0'
       '@effect/sql-sqlite-do': '>=4.0.0-beta.105 || >=4.0.0'
@@ -2633,8 +2638,8 @@ packages:
     peerDependencies:
       effect: ^4.0.0-rc.112
 
-  effect@4.0.0-rc.115:
-    resolution: {integrity: sha512-ogYulZ5ffeOzrJqQrG0XOkDO5lKn2s9KNHhoxJy/6wKUkF0i12dlVXWA9TgsgQ+zV/JzizyG0+XMPepZEQX6vw==}
+  effect@4.0.0-rc.118:
+    resolution: {integrity: sha512-hxhpCd+swzrtu9lnyPpEFre2ODQzJ9qxgyL1oHIEY8NKnW4PxTbM1XzplMZXiAsLD62HO+KJc41Nqxr9T791ZQ==}
 
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
@@ -3476,8 +3481,8 @@ packages:
     resolution: {integrity: sha512-RYONW2MeafgYlkVOKYKkA/Ag7BmXqgIWCa8t1m0JcxrQg9pI9lEqRhAOruOBCbAohOa/gkCF+iPi9hrgvTzu6Q==}
     engines: {node: '>=20.18.1'}
 
-  undici@8.10.2:
-    resolution: {integrity: sha512-/y4/bH9YNU5hi9NIrpOuvGXFcxrj3CMrV+/AYpowAYTpHn8gX/XPFjNy766FPoYY0miQhdW977JFWKGNhBdwyQ==}
+  undici@8.11.2:
+    resolution: {integrity: sha512-u4UB2/IrKdU6lFxumHmmo1a3fCQO5tzQllRorfoRS63txhrB7xTpSn1PftwC4qEHkOaqP95fCWW4lJzwErwzhQ==}
     engines: {node: '>=22.19.0'}
 
   unenv@2.0.0-rc.24:
@@ -3594,6 +3599,18 @@ packages:
       utf-8-validate:
         optional: true
 
+  ws@8.22.0:
+    resolution: {integrity: sha512-Ydggc987+RO0AnWtZ/7Wq9FtNvcrL1b/RO0ud9mWjUPgDrsAAwQSF51sm2hm1XofbU/4jkpGEsLFsZZxU+1DOg==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
   xml-naming@0.3.0:
     resolution: {integrity: sha512-ghig2TBE/H11aOVgmahA3MhimvkBr6JIYknH/Dhdk10nXwdbIqBJsbfMxpvFPG8bAw77gN29aQWvKpmVoPlvPQ==}
     engines: {node: '>=16.0.0'}
@@ -3645,14 +3662,14 @@ packages:
 
 snapshots:
 
-  '@alchemy.run/cloudflare-runtime@2.0.0-beta.79(@distilled.cloud/cloudflare@1.0.0-rc.12(effect@4.0.0-rc.115))(@effect/platform-node@4.0.0-rc.115(effect@4.0.0-rc.115)(redis@6.2.1))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(effect@4.0.0-rc.115)(rolldown@1.2.5)(typescript@7.0.2)':
+  '@alchemy.run/cloudflare-runtime@2.0.0-beta.79(@distilled.cloud/cloudflare@1.0.0-rc.12(effect@4.0.0-rc.118))(@effect/platform-node@4.0.0-rc.118(effect@4.0.0-rc.118)(redis@6.2.1))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(effect@4.0.0-rc.118)(rolldown@1.2.5)(typescript@7.0.2)':
     dependencies:
       '@alchemy.run/node-utils': 2.0.0-beta.79
       '@cloudflare/unenv-preset': 2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260901.1)
-      '@distilled.cloud/cloudflare': 1.0.0-rc.12(effect@4.0.0-rc.115)
+      '@distilled.cloud/cloudflare': 1.0.0-rc.12(effect@4.0.0-rc.118)
       '@puppeteer/browsers': 3.2.2(yauzl@3.4.0)
       capnp-es: 0.0.16(typescript@7.0.2)
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
       magic-string: 0.30.21
       mime: 4.1.0
       sharp: 0.35.4(@types/node@26.6.1)
@@ -3660,7 +3677,7 @@ snapshots:
       workerd: 1.20260901.1
       yauzl: 3.4.0
     optionalDependencies:
-      '@effect/platform-node': 4.0.0-rc.115(effect@4.0.0-rc.115)(redis@6.2.1)
+      '@effect/platform-node': 4.0.0-rc.118(effect@4.0.0-rc.118)(redis@6.2.1)
       rolldown: 1.2.5
       vite: '@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1)'
     transitivePeerDependencies:
@@ -3668,9 +3685,9 @@ snapshots:
       - proxy-agent
       - typescript
 
-  '@alchemy.run/floci@2.0.0-beta.79(effect@4.0.0-rc.115)':
+  '@alchemy.run/floci@2.0.0-beta.79(effect@4.0.0-rc.118)':
     dependencies:
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
 
   '@alchemy.run/node-utils@2.0.0-beta.79':
     dependencies:
@@ -3894,138 +3911,142 @@ snapshots:
 
   '@cloudflare/workers-types@5.20260917.1': {}
 
-  '@distilled.cloud/aws@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/aws@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
       '@aws-sdk/types': 3.974.5
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
       '@smithy/shared-ini-file-loader': 4.7.2
       '@smithy/types': 4.18.0
       '@smithy/util-base64': 4.6.2
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
       fast-xml-parser: 5.11.1
 
-  '@distilled.cloud/axiom@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/axiom@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
 
-  '@distilled.cloud/cloudflare@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/cloudflare@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
 
-  '@distilled.cloud/core@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/core@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
       graphql: 16.11.0
 
-  '@distilled.cloud/fly-io@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/fly-io@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
 
-  '@distilled.cloud/hetzner@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/hetzner@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
 
-  '@distilled.cloud/neon@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/neon@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
 
-  '@distilled.cloud/planetscale@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/planetscale@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
 
-  '@distilled.cloud/prisma@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/prisma@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
 
-  '@distilled.cloud/railway@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/railway@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
 
-  '@distilled.cloud/stripe@1.0.0-rc.12(effect@4.0.0-rc.115)':
+  '@distilled.cloud/stripe@1.0.0-rc.12(effect@4.0.0-rc.118)':
     dependencies:
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
 
   '@drizzle-team/brocli@0.12.1': {}
 
-  '@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115)':
+  '@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118)':
     dependencies:
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
 
-  '@effect/platform-node-shared@4.0.0-rc.115(effect@4.0.0-rc.115)':
+  '@effect/platform-node-shared@4.0.0-rc.118(effect@4.0.0-rc.118)':
     dependencies:
       '@types/ws': 8.18.1
-      effect: 4.0.0-rc.115
-      ws: 8.21.3
+      effect: 4.0.0-rc.118
+      ws: 8.22.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node@4.0.0-rc.115(effect@4.0.0-rc.115)(redis@6.2.1)':
+  '@effect/platform-node@4.0.0-rc.118(effect@4.0.0-rc.118)(redis@6.2.1)':
     dependencies:
-      '@effect/platform-node-shared': 4.0.0-rc.115(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@effect/platform-node-shared': 4.0.0-rc.118(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
       redis: 6.2.1
-      undici: 8.10.2
+      undici: 8.11.2
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.115)':
+  '@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.118)':
     dependencies:
       '@cloudflare/workers-types': 5.20260917.1
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
 
-  '@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115)':
+  '@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118)':
     dependencies:
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
 
-  '@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.115)':
+  '@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.118)':
     dependencies:
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
 
-  '@effect/tsgo-darwin-arm64@0.45.0':
+  '@effect/tsgo-darwin-arm64@0.46.1':
     optional: true
 
-  '@effect/tsgo-darwin-x64@0.45.0':
+  '@effect/tsgo-darwin-x64@0.46.1':
     optional: true
 
-  '@effect/tsgo-linux-arm64@0.45.0':
+  '@effect/tsgo-linux-arm64@0.46.1':
     optional: true
 
-  '@effect/tsgo-linux-arm@0.45.0':
+  '@effect/tsgo-linux-arm@0.46.1':
     optional: true
 
-  '@effect/tsgo-linux-x64@0.45.0':
+  '@effect/tsgo-linux-x64@0.46.1':
     optional: true
 
-  '@effect/tsgo-win32-arm64@0.45.0':
+  '@effect/tsgo-win32-arm64@0.46.1':
     optional: true
 
-  '@effect/tsgo-win32-x64@0.45.0':
+  '@effect/tsgo-win32-x64@0.46.1':
     optional: true
 
-  '@effect/tsgo@0.45.0':
+  '@effect/tsgo@0.46.1':
     optionalDependencies:
-      '@effect/tsgo-darwin-arm64': 0.45.0
-      '@effect/tsgo-darwin-x64': 0.45.0
-      '@effect/tsgo-linux-arm': 0.45.0
-      '@effect/tsgo-linux-arm64': 0.45.0
-      '@effect/tsgo-linux-x64': 0.45.0
-      '@effect/tsgo-win32-arm64': 0.45.0
-      '@effect/tsgo-win32-x64': 0.45.0
+      '@effect/tsgo-darwin-arm64': 0.46.1
+      '@effect/tsgo-darwin-x64': 0.46.1
+      '@effect/tsgo-linux-arm': 0.46.1
+      '@effect/tsgo-linux-arm64': 0.46.1
+      '@effect/tsgo-linux-x64': 0.46.1
+      '@effect/tsgo-win32-arm64': 0.46.1
+      '@effect/tsgo-win32-x64': 0.46.1
 
-  '@effect/vitest@4.0.0-rc.115(patch_hash=4a8ec7b568524d3c7e832c6f1cf843e09af90dd29542b0ba512d7f54ebbdd52f)(effect@4.0.0-rc.115)':
+  '@effect/vitest@4.0.0-rc.115(patch_hash=4a8ec7b568524d3c7e832c6f1cf843e09af90dd29542b0ba512d7f54ebbdd52f)(effect@4.0.0-rc.118)':
     dependencies:
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
+
+  '@effect/vitest@4.0.0-rc.118(effect@4.0.0-rc.118)':
+    dependencies:
+      effect: 4.0.0-rc.118
 
   '@electric-sql/pglite-socket@0.0.20(@electric-sql/pglite@0.3.15)':
     dependencies:
@@ -4131,11 +4152,11 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@foldkit/devtools-mcp@0.20.0(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115))(zod@4.6.5)':
+  '@foldkit/devtools-mcp@0.20.0(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118))(zod@4.6.5)':
     dependencies:
       '@modelcontextprotocol/sdk': 1.29.0(zod@4.6.5)
-      effect: 4.0.0-rc.115
-      foldkit: 0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115)
+      effect: 4.0.0-rc.118
+      foldkit: 0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118)
       ws: 8.21.3
     transitivePeerDependencies:
       - '@cfworker/json-schema'
@@ -4144,30 +4165,30 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@foldkit/devtools@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(@foldkit/ui@0.160.0(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115)))(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115))':
+  '@foldkit/devtools@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(@foldkit/ui@0.160.0(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118)))(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118))':
     dependencies:
-      '@effect/platform-browser': 4.0.0-rc.115(effect@4.0.0-rc.115)
-      '@foldkit/ui': 0.160.0(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115))
+      '@effect/platform-browser': 4.0.0-rc.118(effect@4.0.0-rc.118)
+      '@foldkit/ui': 0.160.0(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118))
       clsx: 2.1.1
-      effect: 4.0.0-rc.115
-      foldkit: 0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115)
+      effect: 4.0.0-rc.118
+      foldkit: 0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118)
 
-  '@foldkit/oxlint-plugin@0.13.0(effect@4.0.0-rc.115)':
+  '@foldkit/oxlint-plugin@0.13.0(effect@4.0.0-rc.118)':
     dependencies:
-      effect-oxlint: 0.3.4(effect@4.0.0-rc.115)
+      effect-oxlint: 0.3.4(effect@4.0.0-rc.118)
     transitivePeerDependencies:
       - effect
 
-  '@foldkit/ui@0.160.0(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115))':
+  '@foldkit/ui@0.160.0(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118))':
     dependencies:
       '@floating-ui/dom': 1.8.0
-      effect: 4.0.0-rc.115
-      foldkit: 0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115)
+      effect: 4.0.0-rc.118
+      foldkit: 0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118)
 
-  '@foldkit/vite-plugin@0.22.0(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(effect@4.0.0-rc.115)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115))':
+  '@foldkit/vite-plugin@0.22.0(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(effect@4.0.0-rc.118)(foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118))':
     dependencies:
-      effect: 4.0.0-rc.115
-      foldkit: 0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115)
+      effect: 4.0.0-rc.118
+      foldkit: 0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118)
       magic-string: 1.4.1
       vite: '@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1)'
       ws: 8.21.3
@@ -5154,27 +5175,27 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  alchemy@2.0.0-beta.79(@effect/platform-node@4.0.0-rc.115(effect@4.0.0-rc.115)(redis@6.2.1))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(drizzle-kit@1.0.0-rc.5-ab785fc)(drizzle-orm@1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.115))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.115)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5))(effect@4.0.0-rc.115)(pg@8.23.0)(typescript@7.0.2)(ws@8.21.3):
+  alchemy@2.0.0-beta.79(@effect/platform-node@4.0.0-rc.118(effect@4.0.0-rc.118)(redis@6.2.1))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(drizzle-kit@1.0.0-rc.5-ab785fc)(drizzle-orm@1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.118))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.118))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.118)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5))(effect@4.0.0-rc.118)(pg@8.23.0)(typescript@7.0.2)(ws@8.21.3):
     dependencies:
-      '@alchemy.run/cloudflare-runtime': 2.0.0-beta.79(@distilled.cloud/cloudflare@1.0.0-rc.12(effect@4.0.0-rc.115))(@effect/platform-node@4.0.0-rc.115(effect@4.0.0-rc.115)(redis@6.2.1))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(effect@4.0.0-rc.115)(rolldown@1.2.5)(typescript@7.0.2)
-      '@alchemy.run/floci': 2.0.0-beta.79(effect@4.0.0-rc.115)
+      '@alchemy.run/cloudflare-runtime': 2.0.0-beta.79(@distilled.cloud/cloudflare@1.0.0-rc.12(effect@4.0.0-rc.118))(@effect/platform-node@4.0.0-rc.118(effect@4.0.0-rc.118)(redis@6.2.1))(@types/node@26.6.1)(@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))(effect@4.0.0-rc.118)(rolldown@1.2.5)(typescript@7.0.2)
+      '@alchemy.run/floci': 2.0.0-beta.79(effect@4.0.0-rc.118)
       '@alchemy.run/node-utils': 2.0.0-beta.79
       '@alchemy.run/sigil': 0.0.0-alpha.11
       '@aws-sdk/credential-providers': 3.1135.0
-      '@distilled.cloud/aws': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@distilled.cloud/axiom': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@distilled.cloud/cloudflare': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@distilled.cloud/fly-io': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@distilled.cloud/hetzner': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@distilled.cloud/neon': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@distilled.cloud/planetscale': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@distilled.cloud/prisma': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@distilled.cloud/railway': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@distilled.cloud/stripe': 1.0.0-rc.12(effect@4.0.0-rc.115)
-      '@effect/sql-d1': 4.0.0-rc.115(effect@4.0.0-rc.115)
-      '@effect/sql-sqlite-do': 4.0.0-rc.115(effect@4.0.0-rc.115)
-      '@effect/vitest': 4.0.0-rc.115(patch_hash=4a8ec7b568524d3c7e832c6f1cf843e09af90dd29542b0ba512d7f54ebbdd52f)(effect@4.0.0-rc.115)
+      '@distilled.cloud/aws': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@distilled.cloud/axiom': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@distilled.cloud/cloudflare': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@distilled.cloud/core': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@distilled.cloud/fly-io': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@distilled.cloud/hetzner': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@distilled.cloud/neon': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@distilled.cloud/planetscale': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@distilled.cloud/prisma': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@distilled.cloud/railway': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@distilled.cloud/stripe': 1.0.0-rc.12(effect@4.0.0-rc.118)
+      '@effect/sql-d1': 4.0.0-rc.115(effect@4.0.0-rc.118)
+      '@effect/sql-sqlite-do': 4.0.0-rc.115(effect@4.0.0-rc.118)
+      '@effect/vitest': 4.0.0-rc.115(patch_hash=4a8ec7b568524d3c7e832c6f1cf843e09af90dd29542b0ba512d7f54ebbdd52f)(effect@4.0.0-rc.118)
       '@libsql/client': 0.17.4
       '@octokit/rest': 22.0.1
       '@octokit/webhooks': 14.2.0
@@ -5182,7 +5203,7 @@ snapshots:
       '@types/aws-lambda': 8.10.163
       aws4fetch: 1.0.20
       capnweb: 0.12.0
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
       fflate: 0.8.3
       libsodium-wrappers: 0.8.4
       pathe: 2.0.3
@@ -5192,10 +5213,10 @@ snapshots:
       undici: 7.29.1
       yaml: 2.9.1
     optionalDependencies:
-      '@effect/platform-node': 4.0.0-rc.115(effect@4.0.0-rc.115)(redis@6.2.1)
-      '@effect/sql-pg': 4.0.0-rc.115(effect@4.0.0-rc.115)
+      '@effect/platform-node': 4.0.0-rc.118(effect@4.0.0-rc.118)(redis@6.2.1)
+      '@effect/sql-pg': 4.0.0-rc.118(effect@4.0.0-rc.118)
       drizzle-kit: 1.0.0-rc.5-ab785fc
-      drizzle-orm: 1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.115))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.115)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5)
+      drizzle-orm: 1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.118))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.118))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.118)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5)
       pg: 8.23.0
       vite: '@voidzero-dev/vite-plus-core@0.3.1(@types/node@26.6.1)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1)'
       ws: 8.21.3
@@ -5338,16 +5359,16 @@ snapshots:
       get-tsconfig: 4.14.3
       jiti: 2.7.0
 
-  drizzle-orm@1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-pg@4.0.0-rc.115(effect@4.0.0-rc.115))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.115))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.115)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5):
+  drizzle-orm@1.0.0-rc.5-ab785fc(@cloudflare/workers-types@5.20260917.1)(@effect/sql-d1@4.0.0-rc.115(effect@4.0.0-rc.118))(@effect/sql-pg@4.0.0-rc.118(effect@4.0.0-rc.118))(@effect/sql-sqlite-do@4.0.0-rc.115(effect@4.0.0-rc.118))(@electric-sql/pglite@0.3.15)(@libsql/client@0.17.4)(@types/pg@8.23.1)(effect@4.0.0-rc.118)(pg@8.23.0)(valibot@1.2.0(typescript@7.0.2))(zod@4.6.5):
     optionalDependencies:
       '@cloudflare/workers-types': 5.20260917.1
-      '@effect/sql-d1': 4.0.0-rc.115(effect@4.0.0-rc.115)
-      '@effect/sql-pg': 4.0.0-rc.115(effect@4.0.0-rc.115)
-      '@effect/sql-sqlite-do': 4.0.0-rc.115(effect@4.0.0-rc.115)
+      '@effect/sql-d1': 4.0.0-rc.115(effect@4.0.0-rc.118)
+      '@effect/sql-pg': 4.0.0-rc.118(effect@4.0.0-rc.118)
+      '@effect/sql-sqlite-do': 4.0.0-rc.115(effect@4.0.0-rc.118)
       '@electric-sql/pglite': 0.3.15
       '@libsql/client': 0.17.4
       '@types/pg': 8.23.1
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
       pg: 8.23.0
       valibot: 1.2.0(typescript@7.0.2)
       zod: 4.6.5
@@ -5360,12 +5381,12 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  effect-oxlint@0.3.4(effect@4.0.0-rc.115):
+  effect-oxlint@0.3.4(effect@4.0.0-rc.118):
     dependencies:
       '@oxlint/plugins': 1.83.0
-      effect: 4.0.0-rc.115
+      effect: 4.0.0-rc.118
 
-  effect@4.0.0-rc.115: {}
+  effect@4.0.0-rc.118: {}
 
   emoji-regex@10.6.0: {}
 
@@ -5513,10 +5534,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.115(effect@4.0.0-rc.115))(effect@4.0.0-rc.115):
+  foldkit@0.160.0(@effect/platform-browser@4.0.0-rc.118(effect@4.0.0-rc.118))(effect@4.0.0-rc.118):
     dependencies:
-      '@effect/platform-browser': 4.0.0-rc.115(effect@4.0.0-rc.115)
-      effect: 4.0.0-rc.115
+      '@effect/platform-browser': 4.0.0-rc.118(effect@4.0.0-rc.118)
+      effect: 4.0.0-rc.118
       parse5: 8.0.1
 
   foreground-child@3.3.1:
@@ -6237,7 +6258,7 @@ snapshots:
 
   undici@7.29.1: {}
 
-  undici@8.10.2: {}
+  undici@8.11.2: {}
 
   unenv@2.0.0-rc.24:
     dependencies:
@@ -6367,6 +6388,8 @@ snapshots:
   wrappy@1.0.2: {}
 
   ws@8.21.3: {}
+
+  ws@8.22.0: {}
 
   xml-naming@0.3.0: {}
 
